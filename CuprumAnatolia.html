@@ -1,0 +1,673 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Cuprum Anatolia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: an industrial trading desk. A copper wire bundle cross-section anchors the hero,
+   mono-set grade specs read like a mill sheet, and the page ends in an inquiry that builds a ready-to-send request.
+   The page is bilingual (English / Türkçe); every text node carries a data-i18n key. */
+:root {
+  --bg: #edf2ef;
+  --surface: #f8fbf9;
+  --fg: #14211e;
+  --muted: #546763;
+  --line: #cbd8d3;
+  --copper: #b4531e;
+  --copper-ink: #ffffff;
+  --patina: #1f6b5c;
+  --patina-soft: #d6e8e1;
+  --cu-hi: #f0a56a;
+  --cu-lo: #a3461a;
+  --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1614;
+    --surface: #14201d;
+    --fg: #e7f0ec;
+    --muted: #9db3ad;
+    --line: #26372f;
+    --copper: #e88b4a;
+    --copper-ink: #1b0f07;
+    --patina: #5cc2a9;
+    --patina-soft: #17302a;
+    --cu-hi: #f6b27a;
+    --cu-lo: #b4531e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1614;
+  --surface: #14201d;
+  --fg: #e7f0ec;
+  --muted: #9db3ad;
+  --line: #26372f;
+  --copper: #e88b4a;
+  --copper-ink: #1b0f07;
+  --patina: #5cc2a9;
+  --patina-soft: #17302a;
+  --cu-hi: #f6b27a;
+  --cu-lo: #b4531e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: 100%; max-width: 1160px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--patina); margin: 0 0 14px; }
+h1, h2, h3 { font-family: var(--font-display); text-transform: uppercase; line-height: .95; margin: 0; text-wrap: balance; letter-spacing: .005em; }
+h2 { font-size: clamp(36px, 6vw, 60px); font-weight: 800; }
+h3 { font-size: 24px; font-weight: 700; line-height: 1.05; }
+p { margin: 0; }
+.lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 56ch; }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 800; font-size: 24px; text-transform: uppercase; letter-spacing: .03em; white-space: nowrap; }
+.brand svg { width: 30px; height: 30px; flex: none; }
+.brand span { color: var(--copper); }
+.nav { display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 500; }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--fg); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--surface); }
+.lang button { font: 600 13px/1 var(--font-mono); letter-spacing: .06em; padding: 9px 11px; border: 0; background: transparent; color: var(--muted); cursor: pointer; min-width: 40px; }
+.lang button[aria-pressed="true"] { background: var(--copper); color: var(--copper-ink); }
+.lang button:not([aria-pressed="true"]):hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 15px/1 var(--font-body); padding: 14px 22px; border-radius: 6px; border: 2px solid var(--copper); background: var(--copper); color: var(--copper-ink); text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.07); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--fg); }
+.btn.small { padding: 10px 16px; font-size: 14px; }
+.nav .btn { color: var(--copper-ink); }
+
+/* hero */
+.hero { padding-block: clamp(36px, 7vw, 88px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
+.hero h1 { font-size: clamp(54px, 10.5vw, 128px); font-weight: 900; overflow-wrap: anywhere; }
+.hero h1 em { font-style: normal; color: var(--copper); display: block; }
+.hero .lead { margin-top: 24px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.bundle { width: 100%; max-width: 440px; justify-self: center; }
+.bundle svg { display: block; width: 100%; height: auto; }
+.bundle figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-top: 10px; letter-spacing: .04em; }
+
+/* facts strip */
+.facts { border-block: 1px solid var(--line); background: var(--surface); }
+.facts .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.fact { padding: 22px 20px 22px 0; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fact + .fact { padding-left: 20px; border-left: 1px solid var(--line); }
+.fact b { font-family: var(--font-display); font-size: 30px; font-weight: 800; text-transform: uppercase; line-height: 1; color: var(--copper); }
+.fact span { font-size: 14px; color: var(--muted); }
+
+section.block { padding-block: clamp(48px, 8vw, 96px); }
+.head { display: grid; gap: 16px; margin-bottom: 36px; max-width: 760px; }
+
+/* grades */
+.sheet { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 680px; }
+th, td { text-align: left; padding: 16px 20px; vertical-align: top; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--bg); }
+td.g { font-family: var(--font-display); font-size: 24px; font-weight: 700; text-transform: uppercase; line-height: 1.1; white-space: nowrap; }
+td.s { font-family: var(--font-mono); font-size: 13px; color: var(--patina); white-space: nowrap; }
+td.d { color: var(--muted); font-size: 15px; }
+.note { font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 72ch; }
+
+/* process */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: s; }
+.steps li { counter-increment: s; padding: 24px 24px 8px 0; border-top: 3px solid var(--copper); display: grid; gap: 10px; align-content: start; min-width: 0; }
+.steps li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+.steps li::before { content: attr(data-step) " " counter(s); font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; color: var(--patina); }
+.steps p { color: var(--muted); font-size: 15px; }
+
+/* estimator */
+.est { background: var(--patina-soft); border-block: 1px solid var(--line); }
+.est .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: clamp(18px, 3vw, 28px); display: grid; gap: 16px; min-width: 0; }
+label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; font-family: var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+input, select, textarea { font: 400 16px/1.4 var(--font-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; width: 100%; min-width: 0; text-transform: none; letter-spacing: 0; }
+textarea { resize: vertical; min-height: 96px; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.out { display: grid; gap: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
+.out .big { font-family: var(--font-display); font-weight: 900; font-size: clamp(44px, 8vw, 72px); line-height: 1; color: var(--copper); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.out small, .tag { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.tag { display: inline-block; border: 1px solid var(--patina); color: var(--patina); padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: .1em; justify-self: start; }
+
+/* why */
+.why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.why div { padding: 28px; display: grid; gap: 10px; align-content: start; border-bottom: 1px solid var(--line); min-width: 0; }
+.why div:nth-child(odd) { border-right: 1px solid var(--line); }
+.why div:nth-last-child(-n+2) { border-bottom: 0; }
+.why p { color: var(--muted); font-size: 15px; }
+
+/* contact */
+.contact .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+.addr { display: grid; gap: 18px; margin: 28px 0 0; }
+.addr div { display: grid; gap: 2px; min-width: 0; }
+.addr dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--patina); }
+.addr dd { margin: 0; font-size: 17px; overflow-wrap: anywhere; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.addr dd span { min-width: 0; }
+.copy { font: 600 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 7px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--muted); cursor: pointer; }
+.copy:hover { color: var(--fg); border-color: var(--muted); }
+.result { border: 1px dashed var(--patina); border-radius: 8px; padding: 16px; display: grid; gap: 12px; background: var(--patina-soft); }
+.result pre { margin: 0; white-space: pre-wrap; font: 13px/1.6 var(--font-mono); overflow-wrap: anywhere; }
+.result .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px; font-size: 14px; color: var(--muted); }
+footer .wrap { display: grid; gap: 8px; }
+footer .f1, footer .f2 { display: flex; flex-wrap: wrap; gap: 4px 24px; justify-content: space-between; }
+footer .f1 span, footer .f2 span { min-width: 0; overflow-wrap: anywhere; }
+
+@media (max-width: 900px) {
+  .hero .wrap, .est .wrap, .contact .wrap { grid-template-columns: minmax(0, 1fr); }
+  .bundle { max-width: 320px; justify-self: start; }
+  .facts .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3) { padding-left: 0; border-left: 0; }
+  .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
+  .steps li:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 720px) {
+  .nav a:not(.btn) { display: none; }
+}
+@media (max-width: 560px) {
+  .nav .btn { display: none; }
+  .brand { font-size: 21px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .steps li, .steps li + li { padding-left: 0; border-left: 0; }
+  .why { grid-template-columns: minmax(0, 1fr); }
+  .why div:nth-child(odd) { border-right: 0; }
+  .why div:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  .row2 { grid-template-columns: minmax(0, 1fr); }
+  .fact b { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" data-i18n-aria="aria_home" aria-label="Cuprum Anatolia home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="lg" cx="35%" cy="30%" r="80%"><stop offset="0" style="stop-color:var(--cu-hi)"/><stop offset="1" style="stop-color:var(--cu-lo)"/></radialGradient></defs><circle cx="16" cy="16" r="14" fill="url(#lg)"/><circle cx="16" cy="16" r="6" fill="var(--bg)"/></svg>
+      Cuprum <span>Anatolia</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#materials" data-i18n="n_materials">Materials</a>
+      <a href="#process" data-i18n="n_process">How we buy</a>
+      <a href="#estimate" data-i18n="n_est">Estimator</a>
+      <a href="#sell" class="btn small" data-i18n="n_sell">Sell us copper</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-en" aria-pressed="true">EN</button>
+        <button type="button" id="lang-tr" aria-pressed="false">TR</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" data-i18n="h_eyebrow">Copper buyer · Türkiye</p>
+        <h1><span data-i18n="h_h1a">We buy copper.</span><em data-i18n="h_h1b">Every grade.</em></h1>
+        <p class="lead" data-i18n="h_lead">Cuprum Anatolia purchases copper cathode, rod, bright wire, heavy scrap and cable from suppliers worldwide, delivered to Turkish ports and mills. Prices follow the LME. Payment is secured.</p>
+        <div class="cta">
+          <a class="btn" href="#sell" data-i18n="h_cta1">Send an inquiry</a>
+          <a class="btn ghost" href="#materials" data-i18n="h_cta2">See what we buy</a>
+        </div>
+      </div>
+      <figure class="bundle" style="margin:0">
+        <svg id="bundle" viewBox="0 0 400 400" role="img" data-i18n-aria="aria_bundle" aria-label="Cross-section of a bundle of copper wires">
+          <defs>
+            <radialGradient id="wire" cx="35%" cy="30%" r="80%">
+              <stop offset="0" style="stop-color:var(--cu-hi)"/>
+              <stop offset="1" style="stop-color:var(--cu-lo)"/>
+            </radialGradient>
+          </defs>
+        </svg>
+        <figcaption data-i18n="h_cap">Cu-ETP · 8 mm rod, cross-section</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b data-i18n="f1t">LME-linked</b><span data-i18n="f1d">Every offer is priced off the official LME copper price.</span></div>
+      <div class="fact"><b data-i18n="f2t">Cu 99.99%</b><span data-i18n="f2d">Cathode accepted to LME Grade A (EN 1978).</span></div>
+      <div class="fact"><b data-i18n="f3t">LC or TT</b><span data-i18n="f3d">Letter of credit at sight, or telegraphic transfer.</span></div>
+      <div class="fact"><b data-i18n="f4t">4 ports</b><span data-i18n="f4d">Mersin, İskenderun, Aliağa, Gemlik.</span></div>
+    </div>
+  </div>
+
+  <section class="block" id="materials">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i18n="m_eyebrow">What we buy</p>
+        <h2 data-i18n="m_h2">Copper in every form</h2>
+        <p class="lead" data-i18n="m_lead">From refined cathode to mixed cable. Send photos and a specification, and we reply with a price.</p>
+      </div>
+      <div class="sheet" role="region" data-i18n-aria="aria_table" aria-label="Copper grades we buy" tabindex="0">
+        <table>
+          <thead><tr><th scope="col" data-i18n="th1">Material</th><th scope="col" data-i18n="th2">Typical spec</th><th scope="col" data-i18n="th3">Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="g" data-i18n="r1g">Copper cathode</td><td class="s" data-i18n="r1s">Cu ≥ 99.99%</td><td class="d" data-i18n="r1d">LME Grade A or equivalent. Bundled sheets, strapped, with mill certificate.</td></tr>
+            <tr><td class="g" data-i18n="r2g">Copper wire rod</td><td class="s" data-i18n="r2s">8 mm · Cu-ETP</td><td class="d" data-i18n="r2d">Continuous cast rod, in coils on pallets.</td></tr>
+            <tr><td class="g" data-i18n="r3g">Millberry</td><td class="s" data-i18n="r3s">Bare bright wire</td><td class="d" data-i18n="r3d">Clean, uncoated, unalloyed wire. No insulation, oxidation or solder.</td></tr>
+            <tr><td class="g" data-i18n="r4g">Berry / Candy</td><td class="s" data-i18n="r4s">No.1 copper</td><td class="d" data-i18n="r4d">Clean heavy copper, tube and bus bar. Free of paint, fittings and attachments.</td></tr>
+            <tr><td class="g" data-i18n="r5g">Birch / Cliff</td><td class="s" data-i18n="r5s">Insulated wire</td><td class="d" data-i18n="r5d">Priced against recovery rate after granulation, confirmed by sample.</td></tr>
+            <tr><td class="g" data-i18n="r6g">No.2 copper</td><td class="s" data-i18n="r6s">Cu ≥ 94–96%</td><td class="d" data-i18n="r6d">Mixed or lightly oxidised copper, including turnings and clippings.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" data-i18n="m_note">Grade names follow common ISRI scrap trade usage. The exact specification is agreed in the contract and confirmed at inspection.</p>
+    </div>
+  </section>
+
+  <section class="block" id="process" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i18n="p_eyebrow">How we buy</p>
+        <h2 data-i18n="p_h2">From inquiry to payment</h2>
+      </div>
+      <ol class="steps">
+        <li data-step="STEP"><h3 data-i18n="s1t">Inquiry</h3><p data-i18n="s1d">Tell us the grade, tonnage, packing and loading port. Add photos or a lab report if you have one.</p></li>
+        <li data-step="STEP"><h3 data-i18n="s2t">Offer</h3><p data-i18n="s2d">We quote per tonne, priced against the LME with a discount that reflects grade and delivery terms.</p></li>
+        <li data-step="STEP"><h3 data-i18n="s3t">Inspection</h3><p data-i18n="s3d">An independent inspector samples and weighs at loading. Disputes go to an agreed third-party lab.</p></li>
+        <li data-step="STEP"><h3 data-i18n="s4t">Payment</h3><p data-i18n="s4d">Paid by LC at sight or TT against shipping documents. Final weights and assay set the final invoice.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="est" id="estimate">
+    <div class="wrap block">
+      <div>
+        <p class="eyebrow" data-i18n="e_eyebrow">Payout estimator</p>
+        <h2 data-i18n="e_h2">Work out a rough number</h2>
+        <p class="lead" style="margin-top:16px" data-i18n="e_lead">Enter the LME price and your tonnage to see an indicative payout. It is a guide only. The final price is set after assay.</p>
+      </div>
+      <form class="panel" id="est-form" novalidate>
+        <div class="row2">
+          <label for="e-lme"><span data-i18n="e_lme">LME copper, USD/t</span>
+            <input id="e-lme" type="number" min="0" step="10" value="9500" inputmode="decimal">
+          </label>
+          <label for="e-t"><span data-i18n="e_qty">Quantity, tonnes</span>
+            <input id="e-t" type="number" min="0" step="0.5" value="20" inputmode="decimal">
+          </label>
+        </div>
+        <label for="e-g"><span data-i18n="e_mat">Material</span>
+          <select id="e-g">
+            <option value="0.985" data-i18n="eo1">Copper cathode · 98.5%</option>
+            <option value="0.97" data-i18n="eo2">Copper wire rod · 97%</option>
+            <option value="0.93" selected data-i18n="eo3">Millberry · 93%</option>
+            <option value="0.89" data-i18n="eo4">Berry / Candy · 89%</option>
+            <option value="0.82" data-i18n="eo5">No.2 copper · 82%</option>
+          </select>
+        </label>
+        <div class="out" aria-live="polite">
+          <span class="tag" data-i18n="e_tag">Example figures</span>
+          <div class="big" id="e-out">$0</div>
+          <small id="e-sub"></small>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow" data-i18n="w_eyebrow">Why sell to us</p>
+        <h2 data-i18n="w_h2">A buyer that closes</h2>
+      </div>
+      <div class="why">
+        <div><h3 data-i18n="w1t">Clear pricing</h3><p data-i18n="w1d">One formula, the LME price less a stated discount. No hidden deductions on the final invoice.</p></div>
+        <div><h3 data-i18n="w2t">Secure payment</h3><p data-i18n="w2d">Letters of credit from a Turkish bank, or transfer against documents. You choose.</p></div>
+        <div><h3 data-i18n="w3t">Shipping handled</h3><p data-i18n="w3d">CIF, CFR or FOB. We know the Turkish ports and customs process, and plan delivery with you.</p></div>
+        <div><h3 data-i18n="w4t">Independent checks</h3><p data-i18n="w4d">Weight and quality are verified by a third-party inspector, so both sides rely on the same numbers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="sell" style="padding-top:0">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" data-i18n="c_eyebrow">Sell us copper</p>
+        <h2 data-i18n="c_h2">Send an inquiry</h2>
+        <p class="lead" style="margin-top:16px" data-i18n="c_lead">Fill in the form to build your inquiry, then copy it and send it to us by email.</p>
+        <dl class="addr">
+          <div><dt data-i18n="c_email">Email</dt><dd><span id="v-email">info@cuprumanatolia.com</span><button type="button" class="copy" data-copy="v-email" data-i18n="c_copy">Copy</button></dd></div>
+          <div><dt data-i18n="c_phone">Phone</dt><dd><span id="v-phone">+90 212 345 67 89</span><button type="button" class="copy" data-copy="v-phone" data-i18n="c_copy">Copy</button></dd></div>
+          <div><dt data-i18n="c_office">Office</dt><dd><span data-i18n="c_addr">Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, Istanbul, Türkiye</span></dd></div>
+          <div><dt data-i18n="c_web">Website</dt><dd><span>CUPRUMANATOLIA.com</span></dd></div>
+        </dl>
+      </div>
+      <form class="panel" id="inq" novalidate>
+        <div class="row2">
+          <label for="i-name"><span data-i18n="i_name">Your name</span>
+            <input id="i-name" autocomplete="name" data-i18n-ph="i_name_ph" placeholder="Full name">
+          </label>
+          <label for="i-co"><span data-i18n="i_co">Company</span>
+            <input id="i-co" autocomplete="organization" data-i18n-ph="i_co_ph" placeholder="Company name">
+          </label>
+        </div>
+        <div class="row2">
+          <label for="i-mat"><span data-i18n="i_mat">Material</span>
+            <select id="i-mat">
+              <option data-i18n="io1">Copper cathode</option>
+              <option data-i18n="io2">Copper wire rod</option>
+              <option selected data-i18n="io3">Millberry (bare bright wire)</option>
+              <option data-i18n="io4">Berry / Candy (No.1 copper)</option>
+              <option data-i18n="io5">Birch / Cliff (insulated wire)</option>
+              <option data-i18n="io6">No.2 copper</option>
+            </select>
+          </label>
+          <label for="i-qty"><span data-i18n="i_qty">Quantity, tonnes</span>
+            <input id="i-qty" type="number" min="0" step="0.5" data-i18n-ph="i_qty_ph" placeholder="e.g. 20" inputmode="decimal">
+          </label>
+        </div>
+        <div class="row2">
+          <label for="i-from"><span data-i18n="i_from">Loading port / country</span>
+            <input id="i-from" data-i18n-ph="i_from_ph" placeholder="e.g. Hamburg, Germany">
+          </label>
+          <label for="i-term"><span data-i18n="i_term">Terms</span>
+            <select id="i-term">
+              <option data-i18n="it1">CIF Turkish port</option>
+              <option data-i18n="it2">CFR Turkish port</option>
+              <option data-i18n="it3">FOB origin</option>
+              <option data-i18n="it4">Delivered to our mill</option>
+            </select>
+          </label>
+        </div>
+        <label for="i-notes"><span data-i18n="i_notes">Specification and notes</span>
+          <textarea id="i-notes" data-i18n-ph="i_notes_ph" placeholder="Purity or assay, packing, availability, photos available"></textarea>
+        </label>
+        <button class="btn" type="submit" id="i-go" data-i18n="i_go">Build my inquiry</button>
+        <div class="result" id="i-res" hidden>
+          <pre id="i-txt"></pre>
+          <div class="row">
+            <button class="btn small" type="button" id="i-copy" data-i18n="i_copy">Copy inquiry</button>
+            <small id="i-msg" class="tag" style="border:0;padding:0"></small>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f1">
+      <span data-i18n="ft1">© Cuprum Anatolia · Copper trading, Türkiye</span>
+      <span>info@cuprumanatolia.com · +90 212 345 67 89</span>
+    </div>
+    <div class="f2">
+      <span data-i18n="ft_addr">Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, Istanbul, Türkiye</span>
+      <span data-i18n="ft2">Prices and grades are indicative until confirmed in contract.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Translations: key -> [English, Türkçe]
+  var T = {
+    aria_home: ['Cuprum Anatolia home', 'Cuprum Anatolia ana sayfa'],
+    aria_bundle: ['Cross-section of a bundle of copper wires', 'Bakır tel demetinin kesiti'],
+    aria_table: ['Copper grades we buy', 'Aldığımız bakır kaliteleri'],
+    n_materials: ['Materials', 'Malzemeler'],
+    n_process: ['How we buy', 'Nasıl alıyoruz'],
+    n_est: ['Estimator', 'Hesaplayıcı'],
+    n_sell: ['Sell us copper', 'Bize bakır satın'],
+    h_eyebrow: ['Copper buyer · Türkiye', 'Bakır alıcısı · Türkiye'],
+    h_h1a: ['We buy copper.', 'Bakır alıyoruz.'],
+    h_h1b: ['Every grade.', 'Her kalitede.'],
+    h_lead: [
+      'Cuprum Anatolia purchases copper cathode, rod, bright wire, heavy scrap and cable from suppliers worldwide, delivered to Turkish ports and mills. Prices follow the LME. Payment is secured.',
+      'Cuprum Anatolia, dünyanın dört bir yanındaki tedarikçilerden bakır katot, filmaşin, parlak tel, ağır hurda ve kablo satın alır; Türkiye limanlarına ve fabrikalarına teslim alır. Fiyatlar LME\'ye bağlıdır. Ödeme güvence altındadır.'
+    ],
+    h_cta1: ['Send an inquiry', 'Talep gönderin'],
+    h_cta2: ['See what we buy', 'Aldığımız ürünler'],
+    h_cap: ['Cu-ETP · 8 mm rod, cross-section', 'Cu-ETP · 8 mm filmaşin, kesit'],
+    f1t: ['LME-linked', 'LME\'ye bağlı'],
+    f1d: ['Every offer is priced off the official LME copper price.', 'Her teklif resmi LME bakır fiyatı üzerinden verilir.'],
+    f2t: ['Cu 99.99%', 'Cu %99,99'],
+    f2d: ['Cathode accepted to LME Grade A (EN 1978).', 'Katot, LME Grade A (EN 1978) kalitesinde kabul edilir.'],
+    f3t: ['LC or TT', 'LC veya TT'],
+    f3d: ['Letter of credit at sight, or telegraphic transfer.', 'Görüldüğünde ödemeli akreditif veya banka havalesi (TT).'],
+    f4t: ['4 ports', '4 liman'],
+    f4d: ['Mersin, İskenderun, Aliağa, Gemlik.', 'Mersin, İskenderun, Aliağa, Gemlik.'],
+    m_eyebrow: ['What we buy', 'Ne alıyoruz'],
+    m_h2: ['Copper in every form', 'Her formda bakır'],
+    m_lead: [
+      'From refined cathode to mixed cable. Send photos and a specification, and we reply with a price.',
+      'Rafine katottan karışık kabloya kadar. Fotoğraf ve spesifikasyon gönderin, fiyatla dönelim.'
+    ],
+    th1: ['Material', 'Malzeme'],
+    th2: ['Typical spec', 'Tipik spesifikasyon'],
+    th3: ['Notes', 'Notlar'],
+    r1g: ['Copper cathode', 'Bakır katot'],
+    r1s: ['Cu ≥ 99.99%', 'Cu ≥ %99,99'],
+    r1d: ['LME Grade A or equivalent. Bundled sheets, strapped, with mill certificate.', 'LME Grade A veya eşdeğeri. Bağlanmış levhalar, çemberli, fabrika sertifikalı.'],
+    r2g: ['Copper wire rod', 'Bakır filmaşin'],
+    r2s: ['8 mm · Cu-ETP', '8 mm · Cu-ETP'],
+    r2d: ['Continuous cast rod, in coils on pallets.', 'Sürekli döküm filmaşin, paletli rulolar halinde.'],
+    r3g: ['Millberry', 'Millberry'],
+    r3s: ['Bare bright wire', 'Çıplak parlak tel'],
+    r3d: ['Clean, uncoated, unalloyed wire. No insulation, oxidation or solder.', 'Temiz, kaplamasız, alaşımsız tel. İzolasyon, oksidasyon veya lehim yok.'],
+    r4g: ['Berry / Candy', 'Berry / Candy'],
+    r4s: ['No.1 copper', 'No.1 bakır'],
+    r4d: ['Clean heavy copper, tube and bus bar. Free of paint, fittings and attachments.', 'Temiz ağır bakır, boru ve bara. Boya, bağlantı parçası ve eklenti içermez.'],
+    r5g: ['Birch / Cliff', 'Birch / Cliff'],
+    r5s: ['Insulated wire', 'İzolasyonlu tel'],
+    r5d: ['Priced against recovery rate after granulation, confirmed by sample.', 'Granülasyon sonrası geri kazanım oranına göre fiyatlanır, numune ile teyit edilir.'],
+    r6g: ['No.2 copper', 'No.2 bakır'],
+    r6s: ['Cu ≥ 94–96%', 'Cu ≥ %94–96'],
+    r6d: ['Mixed or lightly oxidised copper, including turnings and clippings.', 'Karışık veya hafif oksitlenmiş bakır; talaş ve kırpıntı dahil.'],
+    m_note: [
+      'Grade names follow common ISRI scrap trade usage. The exact specification is agreed in the contract and confirmed at inspection.',
+      'Kalite adları yaygın ISRI hurda ticareti kullanımını izler. Kesin spesifikasyon sözleşmede belirlenir ve muayenede teyit edilir.'
+    ],
+    p_eyebrow: ['How we buy', 'Nasıl alıyoruz'],
+    p_h2: ['From inquiry to payment', 'Talepten ödemeye'],
+    step: ['STEP', 'ADIM'],
+    s1t: ['Inquiry', 'Talep'],
+    s1d: ['Tell us the grade, tonnage, packing and loading port. Add photos or a lab report if you have one.', 'Kaliteyi, tonajı, ambalajı ve yükleme limanını bildirin. Varsa fotoğraf veya laboratuvar raporu ekleyin.'],
+    s2t: ['Offer', 'Teklif'],
+    s2d: ['We quote per tonne, priced against the LME with a discount that reflects grade and delivery terms.', 'Ton başına teklif veririz; LME fiyatı üzerinden kalite ve teslim şartlarına göre bir iskonto uygulanır.'],
+    s3t: ['Inspection', 'Muayene'],
+    s3d: ['An independent inspector samples and weighs at loading. Disputes go to an agreed third-party lab.', 'Bağımsız bir gözetmen yüklemede numune alır ve tartım yapar. Anlaşmazlıklar, üzerinde uzlaşılan üçüncü taraf laboratuvara gider.'],
+    s4t: ['Payment', 'Ödeme'],
+    s4d: ['Paid by LC at sight or TT against shipping documents. Final weights and assay set the final invoice.', 'Sevk belgeleri karşılığında, görüldüğünde ödemeli akreditif veya TT ile ödenir. Nihai fatura, kesin ağırlık ve analize göre düzenlenir.'],
+    e_eyebrow: ['Payout estimator', 'Ödeme hesaplayıcı'],
+    e_h2: ['Work out a rough number', 'Yaklaşık tutarı hesaplayın'],
+    e_lead: [
+      'Enter the LME price and your tonnage to see an indicative payout. It is a guide only. The final price is set after assay.',
+      'LME fiyatını ve tonajı girin, tahmini ödemeyi görün. Yalnızca fikir verir. Nihai fiyat analizden sonra belirlenir.'
+    ],
+    e_lme: ['LME copper, USD/t', 'LME bakır, USD/ton'],
+    e_qty: ['Quantity, tonnes', 'Miktar, ton'],
+    e_mat: ['Material', 'Malzeme'],
+    eo1: ['Copper cathode · 98.5%', 'Bakır katot · %98,5'],
+    eo2: ['Copper wire rod · 97%', 'Bakır filmaşin · %97'],
+    eo3: ['Millberry · 93%', 'Millberry · %93'],
+    eo4: ['Berry / Candy · 89%', 'Berry / Candy · %89'],
+    eo5: ['No.2 copper · 82%', 'No.2 bakır · %82'],
+    e_tag: ['Example figures', 'Örnek rakamlar'],
+    e_sub: ['{t} t × {l}/t × {p} payable', '{t} ton × {l}/ton × {p} ödenebilir'],
+    w_eyebrow: ['Why sell to us', 'Neden bize satmalısınız'],
+    w_h2: ['A buyer that closes', 'İşi bitiren bir alıcı'],
+    w1t: ['Clear pricing', 'Net fiyatlandırma'],
+    w1d: ['One formula, the LME price less a stated discount. No hidden deductions on the final invoice.', 'Tek formül: LME fiyatından belirtilen iskonto düşülür. Nihai faturada gizli kesinti yoktur.'],
+    w2t: ['Secure payment', 'Güvenli ödeme'],
+    w2d: ['Letters of credit from a Turkish bank, or transfer against documents. You choose.', 'Türk bankasından akreditif veya belge karşılığı havale. Seçim sizin.'],
+    w3t: ['Shipping handled', 'Sevkiyat bizde'],
+    w3d: ['CIF, CFR or FOB. We know the Turkish ports and customs process, and plan delivery with you.', 'CIF, CFR veya FOB. Türk limanlarını ve gümrük sürecini biliriz, teslimatı sizinle planlarız.'],
+    w4t: ['Independent checks', 'Bağımsız kontrol'],
+    w4d: ['Weight and quality are verified by a third-party inspector, so both sides rely on the same numbers.', 'Ağırlık ve kalite üçüncü taraf gözetmen tarafından doğrulanır; iki taraf da aynı rakamlara güvenir.'],
+    c_eyebrow: ['Sell us copper', 'Bize bakır satın'],
+    c_h2: ['Send an inquiry', 'Talep gönderin'],
+    c_lead: ['Fill in the form to build your inquiry, then copy it and send it to us by email.', 'Formu doldurup talebinizi oluşturun, sonra kopyalayıp e-posta ile bize gönderin.'],
+    c_email: ['Email', 'E-posta'],
+    c_phone: ['Phone', 'Telefon'],
+    c_office: ['Office', 'Ofis'],
+    c_web: ['Website', 'Web sitesi'],
+    c_addr: ['Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, Istanbul, Türkiye', 'Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, İstanbul, Türkiye'],
+    c_copy: ['Copy', 'Kopyala'],
+    c_copied: ['Copied', 'Kopyalandı'],
+    i_name: ['Your name', 'Adınız'],
+    i_name_ph: ['Full name', 'Ad soyad'],
+    i_co: ['Company', 'Şirket'],
+    i_co_ph: ['Company name', 'Şirket adı'],
+    i_mat: ['Material', 'Malzeme'],
+    io1: ['Copper cathode', 'Bakır katot'],
+    io2: ['Copper wire rod', 'Bakır filmaşin'],
+    io3: ['Millberry (bare bright wire)', 'Millberry (çıplak parlak tel)'],
+    io4: ['Berry / Candy (No.1 copper)', 'Berry / Candy (No.1 bakır)'],
+    io5: ['Birch / Cliff (insulated wire)', 'Birch / Cliff (izolasyonlu tel)'],
+    io6: ['No.2 copper', 'No.2 bakır'],
+    i_qty: ['Quantity, tonnes', 'Miktar, ton'],
+    i_qty_ph: ['e.g. 20', 'örn. 20'],
+    i_from: ['Loading port / country', 'Yükleme limanı / ülke'],
+    i_from_ph: ['e.g. Hamburg, Germany', 'örn. Hamburg, Almanya'],
+    i_term: ['Terms', 'Teslim şartı'],
+    it1: ['CIF Turkish port', 'CIF Türk limanı'],
+    it2: ['CFR Turkish port', 'CFR Türk limanı'],
+    it3: ['FOB origin', 'FOB çıkış'],
+    it4: ['Delivered to our mill', 'Fabrikamıza teslim'],
+    i_notes: ['Specification and notes', 'Spesifikasyon ve notlar'],
+    i_notes_ph: ['Purity or assay, packing, availability, photos available', 'Saflık veya analiz, ambalaj, hazır miktar, fotoğraf mevcudiyeti'],
+    i_go: ['Build my inquiry', 'Talebimi oluştur'],
+    i_copy: ['Copy inquiry', 'Talebi kopyala'],
+    i_copied: ['Copied. Send it to us by email.', 'Kopyalandı. E-posta ile bize gönderin.'],
+    i_select: ['Text selected. Press copy.', 'Metin seçildi. Kopyalayın.'],
+    o_head: ['Inquiry to Cuprum Anatolia', 'Cuprum Anatolia\'ya talep'],
+    o_name: ['Name', 'Ad'],
+    o_co: ['Company', 'Şirket'],
+    o_mat: ['Material', 'Malzeme'],
+    o_qty: ['Quantity', 'Miktar'],
+    o_t: ['t', 'ton'],
+    o_from: ['Loading port / country', 'Yükleme limanı / ülke'],
+    o_term: ['Terms', 'Şartlar'],
+    o_notes: ['Notes', 'Notlar'],
+    ft1: ['© Cuprum Anatolia · Copper trading, Türkiye', '© Cuprum Anatolia · Bakır ticareti, Türkiye'],
+    ft_addr: ['Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, Istanbul, Türkiye', 'Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, İstanbul, Türkiye'],
+    ft2: ['Prices and grades are indicative until confirmed in contract.', 'Fiyat ve kaliteler sözleşmede teyit edilene kadar tahminidir.']
+  };
+
+  var lang = 'en', built = false;
+  function t(k) { return T[k][lang === 'tr' ? 1 : 0]; }
+
+  // Hex-packed wire bundle
+  var svg = document.getElementById('bundle'), NS = 'http://www.w3.org/2000/svg';
+  var R = 21, D = 44, rings = 4, cx = 200, cy = 200, n = 0;
+  for (var q = -rings; q <= rings; q++) {
+    for (var r = Math.max(-rings, -q - rings); r <= Math.min(rings, -q + rings); r++) {
+      var x = cx + D * (q + r / 2), y = cy + D * (r * Math.sqrt(3) / 2);
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', x.toFixed(1)); c.setAttribute('cy', y.toFixed(1));
+      c.setAttribute('r', R); c.setAttribute('fill', 'url(#wire)');
+      c.setAttribute('stroke', 'var(--cu-lo)'); c.setAttribute('stroke-width', '1');
+      c.setAttribute('opacity', (0.82 + ((n * 37) % 18) / 100).toFixed(2));
+      svg.appendChild(c); n++;
+    }
+  }
+
+  // Estimator
+  function payout(lme, tons, pct) { return Math.max(0, lme) * Math.max(0, tons) * pct; }
+  var eL = document.getElementById('e-lme'), eT = document.getElementById('e-t'), eG = document.getElementById('e-g');
+  function upd() {
+    var fmt = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : 'en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    var pct = parseFloat(eG.value), l = parseFloat(eL.value) || 0, tons = parseFloat(eT.value) || 0;
+    var p = (pct * 100).toFixed(1);
+    p = lang === 'tr' ? '%' + p.replace('.', ',') : p + '%';
+    document.getElementById('e-out').textContent = fmt.format(payout(l, tons, pct));
+    document.getElementById('e-sub').textContent = t('e_sub').replace('{t}', tons).replace('{l}', fmt.format(l)).replace('{p}', p);
+  }
+  [eL, eT, eG].forEach(function (el) { el.addEventListener('input', upd); });
+  document.getElementById('est-form').addEventListener('submit', function (e) { e.preventDefault(); });
+
+  // Inquiry builder
+  var form = document.getElementById('inq'), res = document.getElementById('i-res'), txt = document.getElementById('i-txt'), msg = document.getElementById('i-msg');
+  function v(id) { return (document.getElementById(id).value || '').trim() || '-'; }
+  function selText(id) { var s = document.getElementById(id); return s.options[s.selectedIndex].textContent; }
+  function build() {
+    txt.textContent = [
+      t('o_head'),
+      t('o_name') + ': ' + v('i-name'),
+      t('o_co') + ': ' + v('i-co'),
+      t('o_mat') + ': ' + selText('i-mat'),
+      t('o_qty') + ': ' + v('i-qty') + ' ' + t('o_t'),
+      t('o_from') + ': ' + v('i-from'),
+      t('o_term') + ': ' + selText('i-term'),
+      t('o_notes') + ': ' + v('i-notes')
+    ].join('\n');
+    res.hidden = false; msg.textContent = '';
+    built = true;
+  }
+  form.addEventListener('submit', function (e) { e.preventDefault(); build(); });
+
+  function copyText(text, onOk, onFail) {
+    try { navigator.clipboard.writeText(text).then(onOk, onFail); } catch (err) { onFail(); }
+  }
+  function selectNode(node) {
+    var rg = document.createRange(); rg.selectNodeContents(node);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(rg);
+  }
+  document.getElementById('i-copy').addEventListener('click', function () {
+    copyText(txt.textContent, function () { msg.textContent = t('i_copied'); }, function () { selectNode(txt); msg.textContent = t('i_select'); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (b) {
+    b.addEventListener('click', function () {
+      var src = document.getElementById(b.getAttribute('data-copy'));
+      copyText(src.textContent, function () {
+        b.textContent = t('c_copied');
+        setTimeout(function () { b.textContent = t('c_copy'); }, 1600);
+      }, function () { selectNode(src); });
+    });
+  });
+
+  // Language
+  function apply() {
+    document.documentElement.lang = lang;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-ph]'), function (el) { el.placeholder = t(el.getAttribute('data-i18n-ph')); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-aria]'), function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+    Array.prototype.forEach.call(document.querySelectorAll('.steps li'), function (el) { el.setAttribute('data-step', t('step')); });
+    document.getElementById('lang-en').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    document.getElementById('lang-tr').setAttribute('aria-pressed', lang === 'tr' ? 'true' : 'false');
+    upd();
+    if (built) build();
+  }
+  function setLang(l) {
+    lang = l;
+    try { localStorage.setItem('ca-lang', l); } catch (err) {}
+    apply();
+  }
+  document.getElementById('lang-en').addEventListener('click', function () { setLang('en'); });
+  document.getElementById('lang-tr').addEventListener('click', function () { setLang('tr'); });
+
+  // Initial language: link hash (#tr / #en), then saved choice, then browser language
+  var start = 'en', saved = null;
+  try { saved = localStorage.getItem('ca-lang'); } catch (err) {}
+  if (location.hash === '#tr') start = 'tr';
+  else if (location.hash === '#en') start = 'en';
+  else if (saved === 'tr' || saved === 'en') start = saved;
+  else if ((navigator.language || '').toLowerCase().indexOf('tr') === 0) start = 'tr';
+  lang = start;
+  apply();
+})();
+</script>
+
+</body></html>
