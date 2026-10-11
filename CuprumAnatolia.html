@@ -1,4 +1,8 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cuprum Anatolia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,10 +171,7 @@ textarea { resize: vertical; min-height: 96px; }
 .result pre { margin: 0; white-space: pre-wrap; font: 13px/1.6 var(--font-mono); overflow-wrap: anywhere; }
 .result .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
-footer { border-top: 1px solid var(--line); padding-block: 28px; font-size: 14px; color: var(--muted); }
-footer .wrap { display: grid; gap: 8px; }
-footer .f1, footer .f2 { display: flex; flex-wrap: wrap; gap: 4px 24px; justify-content: space-between; }
-footer .f1 span, footer .f2 span { min-width: 0; overflow-wrap: anywhere; }
+main { padding-bottom: 24px; }
 
 @media (max-width: 900px) {
   .hero .wrap, .est .wrap, .contact .wrap { grid-template-columns: minmax(0, 1fr); }
@@ -198,6 +199,8 @@ footer .f1 span, footer .f2 span { min-width: 0; overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 
+</head>
+<body>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top" data-i18n-aria="aria_home" aria-label="Cuprum Anatolia home">
@@ -405,19 +408,6 @@ footer .f1 span, footer .f2 span { min-width: 0; overflow-wrap: anywhere; }
     </div>
   </section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <div class="f1">
-      <span data-i18n="ft1">© Cuprum Anatolia · Copper trading, Türkiye</span>
-      <span>info@cuprumanatolia.com · +90 212 345 67 89</span>
-    </div>
-    <div class="f2">
-      <span data-i18n="ft_addr">Yeniköy Mah. Köybaşı Cad. No: 24, Sarıyer, Istanbul, Türkiye</span>
-      <span data-i18n="ft2">Prices and grades are indicative until confirmed in contract.</span>
-    </div>
-  </div>
-</footer>
 
 <script>
 (function () {
@@ -669,5 +659,5 @@ footer .f1 span, footer .f2 span { min-width: 0; overflow-wrap: anywhere; }
   apply();
 })();
 </script>
-
-</body></html>
+</body>
+</html>
